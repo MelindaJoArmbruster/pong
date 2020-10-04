@@ -16,13 +16,9 @@ window.onload = function () {
 };
 
 function moveEverything() {
-  if (x > canvas.clientWidth || x < 0) {
-    xDir *= -1;
-  }
+  if (x > canvas.clientWidth || x < 0) xDir *= -1;
   x += xDir;
-  if (y > canvas.clientHeight || y < 0) {
-    yDir *= -1;
-  }
+  if (y > canvas.clientHeight || y < 0) yDir *= -1;
   y += yDir;
 }
 
