@@ -15,13 +15,13 @@ window.onload = function () {
     moveEverything();
     drawEverything();
   }, 1000 / fps);
-  canvas.addEventListener("mousemove", function (evt) {
+  canvas.addEventListener("mousemove", function (evt) { //track mouse for paddle movement
     var mousePos = calculateMousePos(evt);
     paddle1Y = mousePos.y - PADDLE_HEIGHT / 2;
   });
 };
 
-function calculateMousePos(evt) {
+function calculateMousePos(evt) {  
   var rect = canvas.getBoundingClientRect();
   var root = document.documentElement;
   var mouseX = evt.clientX - rect.left - root.scrollLeft;
@@ -33,10 +33,10 @@ function calculateMousePos(evt) {
 }
 
 function moveEverything() {
-  if (x > canvas.clientWidth || x < 0) xDir *= -1;
-  x += xDir;
-  if (y > canvas.clientHeight || y < 0) yDir *= -1;
-  y += yDir;
+  if (x > canvas.clientWidth || x < 0) xDir *= -1; //invert ball x direction
+  x += xDir;                                          
+  if (y > canvas.clientHeight || y < 0) yDir *= -1; //invert ball y direction
+  y += yDir;                                     
 }
 
 function drawEverything() {
