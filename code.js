@@ -4,6 +4,8 @@ var x = 0;
 var y = 0;
 var xDir = 5;
 var yDir = 5;
+var paddle1Y = 250;
+const PADDLE_HEIGHT = 100;
 
 window.onload = function () {
   canvas = document.getElementById("gameCanvas");
@@ -13,7 +15,22 @@ window.onload = function () {
     moveEverything();
     drawEverything();
   }, 1000 / fps);
+  canvas.addEventListener("mousemove", function (evt) {
+    var mousePos = calculateMousePos(evt);
+    paddle1Y = mousePos.y - PADDLE_HEIGHT / 2;
+  });
 };
+
+function calculateMousePos(evt) {
+  var rect = canvas.getBoundingClientRect();
+  var root = document.documentElement;
+  var mouseX = evt.clientX - rect.left - root.scrollLeft;
+  var mouseY = evt.clientY - rect.top - root.scrollTop;
+  return {
+    x: mouseX,
+    y: mouseY,
+  };
+}
 
 function moveEverything() {
   if (x > canvas.clientWidth || x < 0) xDir *= -1;
@@ -23,14 +40,9 @@ function moveEverything() {
 }
 
 function drawEverything() {
-  //draw playing field
-  colorRect(0, 0, canvas.clientWidth, canvas.clientHeight, "black");
-
-  //draw paddle
-  colorRect(0, 300, 10, 100, "white");
-
-  //draw ball
-  colorCirc(x, y, 10, "white");
+  colorRect(0, 0, canvas.clientWidth, canvas.clientHeight, "black"); // draw playing field
+  colorRect(0, paddle1Y, 10, PADDLE_HEIGHT, "white"); //draw paddle
+  colorCirc(x, y, 10, "white"); // draw ball
 }
 
 function colorRect(leftX, topY, width, height, drawColor) {

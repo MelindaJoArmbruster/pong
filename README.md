@@ -1,1 +1,1 @@
-# pong
+# Pong-style arcade game.
